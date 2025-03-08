@@ -50,23 +50,25 @@ const BlogPost: React.FC = () => {
                 const categoriesData = await categoriesRes.json();
                 const tagsData = await tagsRes.json();
 
+                if (!newsData.data || !Array.isArray(newsData.data)) throw new Error("Datos de noticias inválidos");
+                if (!categoriesData.data || !Array.isArray(categoriesData.data)) throw new Error("Datos de categorías inválidos");
+                if (!tagsData.data || !Array.isArray(tagsData.data)) throw new Error("Datos de tags inválidos");
+
                 const parsedNews: NoticiaEntity[] = newsData.data.map((item: any) => ({
                     id: item.id,
                     titulo: item.titulo,
                     fecha: item.fecha,
                     imgMiniatura: item.imgMiniatura,
                     categoriaId: item.categoria?.id ?? null,
-                    tags: item.tags?.map((t: any) => t.tag.nombre) ?? [],  // Tags como strings
+                    tags: Array.isArray(item.tags) ? item.tags.map((t: any) => t.tag?.nombre ?? '') : []
                 }));
 
                 setNews(parsedNews);
-
                 setCategories(categoriesData.data);
-
                 setTags(
                     tagsData.data.map((t: any) => ({
-                        label: t.nombre,
-                        value: t.nombre
+                        label: t?.nombre ?? 'Desconocido',
+                        value: t?.nombre ?? ''
                     }))
                 );
 
@@ -107,7 +109,7 @@ const BlogPost: React.FC = () => {
                     >
                         <BiCategory className="mr-2 text-lg" />
                         {selectedCategory
-                            ? categories.find((cat) => cat.id === selectedCategory)?.nombre
+                            ? categories.find((cat) => cat.id === selectedCategory)?.nombre ?? "Categoría desconocida"
                             : 'Últimas Noticias'}
                         <IoChevronDown className="ml-2" />
                     </button>
@@ -127,17 +129,19 @@ const BlogPost: React.FC = () => {
                                     </button>
                                 </li>
                                 {categories.map((category) => (
-                                    <li key={category.id}>
-                                        <button
-                                            onClick={() => {
-                                                setSelectedCategory(category.id);
-                                                setIsDropdownOpen(false);
-                                            }}
-                                            className="w-full text-left px-4 py-2 hover:bg-primary-500 hover:text-white text-gray-700"
-                                        >
-                                            {category.nombre}
-                                        </button>
-                                    </li>
+                                    category?.id && category?.nombre ? (
+                                        <li key={category.id}>
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedCategory(category.id);
+                                                    setIsDropdownOpen(false);
+                                                }}
+                                                className="w-full text-left px-4 py-2 hover:bg-primary-500 hover:text-white text-gray-700"
+                                            >
+                                                {category.nombre}
+                                            </button>
+                                        </li>
+                                    ) : null
                                 ))}
                             </ul>
                         </div>
@@ -155,58 +159,27 @@ const BlogPost: React.FC = () => {
                 />
             </div>
 
-            {/* Noticias agrupadas */}
-            {categories
-                .filter((category) => selectedCategory === null || category.id === selectedCategory)
-                .map((category) => {
-                    const categoryNews = filteredNews.filter((item) => item.categoriaId === category.id);
-                    const visibleNews = categoryNews.slice(0, newsLimit[category.id] || 8);
-                    const hasMoreNews = categoryNews.length > visibleNews.length;
-
-                    return (
-                        <div key={category.id} className="mb-12">
-                            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                                {category.nombre}
-                            </h3>
-
-                            <div className="flex flex-wrap gap-6">
-                                {visibleNews.map((item) => (
-                                    <div
-                                        key={item.id}
-                                        className="flex flex-col w-full md:max-w-[350px] min-w-[350px] rounded-lg shadow-lg bg-white dark:bg-gray-800 text-primary-900 dark:text-primary-50 overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                                    >
-                                        <div className="relative w-full h-40">
-                                            <Image src={item.imgMiniatura} alt={item.titulo} layout="fill" className="object-cover" unoptimized />
-                                        </div>
-                                        <div className="p-4">
-                                            <div className="flex flex-wrap gap-2 mb-2">
-                                                {item.tags.map((tag, idx) => (
-                                                    <span key={idx} className="text-xs font-medium text-primary-500 bg-primary-100 px-2 py-1 rounded-full">
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                            <h3 className="text-sm font-bold mb-2">{item.titulo}</h3>
-                                            <p className="text-xs text-gray-500 mb-4">{new Date(item.fecha).toLocaleDateString()}</p>
-                                            <Link href={`/noticias/${item.id}`} className="inline-block text-center bg-primary-500 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-primary-600">
-                                                Leer Más
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ))}
+            {/* Noticias */}
+            {filteredNews.length === 0 ? (
+                <p className="text-center text-gray-500">No hay noticias disponibles</p>
+            ) : (
+                <div className="flex flex-wrap gap-6">
+                    {filteredNews.map((item) => (
+                        <div key={item.id} className="flex flex-col w-full md:max-w-[350px] min-w-[350px] rounded-lg shadow-lg bg-white dark:bg-gray-800 text-primary-900 dark:text-primary-50 overflow-hidden transform transition-transform duration-300 hover:scale-105">
+                            <div className="relative w-full h-40">
+                                <Image src={item.imgMiniatura} alt={item.titulo} layout="fill" className="object-cover" unoptimized />
                             </div>
-
-                            {hasMoreNews && (
-                                <button
-                                    onClick={() => setNewsLimit({ ...newsLimit, [category.id]: newsLimit[category.id] + 8 })}
-                                    className="mt-4 px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-600 transition"
-                                >
-                                    Ver Más
-                                </button>
-                            )}
+                            <div className="p-4">
+                                <h3 className="text-sm font-bold mb-2">{item.titulo}</h3>
+                                <p className="text-xs text-gray-500 mb-4">{new Date(item.fecha).toLocaleDateString()}</p>
+                                <Link href={`/noticias/${item.id}`} className="inline-block text-center bg-primary-500 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-primary-600">
+                                    Leer Más
+                                </Link>
+                            </div>
                         </div>
-                    );
-                })}
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
