@@ -56,7 +56,7 @@ const Parallax: React.FC<ParallaxProps> = ({
 
       {/* Overlay con transparencia */}
       {overlay && (
-        <div className="absolute inset-0 bg-black/40 dark:bg-black/40" />
+        <div className="absolute inset-0 bg-black/70 dark:bg-black/70" />
       )}
 
       {/* Contenido con separación del fondo */}

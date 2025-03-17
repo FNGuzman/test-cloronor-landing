@@ -59,10 +59,10 @@ export default function Footer() {
                             <div>
                                 <h3 className="text-lg font-bold mb-4">Contacto</h3>
                                 <ul className="space-y-2">
-                                    {/* <li>+54 9 370 445-8452</li> */}
                                     <li className="break-words text-sm">
                                         ventas@cloronor.com.ar
                                     </li>
+                                    <li>+54 9 370 4841262</li>
                                 </ul>
                             </div>
 

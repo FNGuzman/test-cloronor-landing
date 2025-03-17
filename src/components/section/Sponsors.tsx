@@ -1,14 +1,14 @@
 import React from 'react';
 
 // Importa los logos desde tu carpeta de assets
-import logo1 from '../../assets/image/logo/sponsors/logo1.png';
-import logo2 from '../../assets/image/logo/sponsors/logo2.png';
-import logo3 from '../../assets/image/logo/sponsors/logo3.png';
+import logo1 from '../../assets/image/logo/sponsors/logo2.png';
+import logo2 from '../../assets/image/logo/sponsors/logo3.png';
+import logo3 from '../../assets/image/logo/sponsors/logo1.png';
 
 const sponsors = [
     { id: 1, src: logo1, alt: 'Sponsor 1', link: '' },
-    { id: 2, src: logo2, alt: 'Sponsor 2', link: '' },
-    { id: 3, src: logo3, alt: 'Sponsor 3', link: '' },
+    { id: 2, src: logo2, alt: 'Sponsor 2', link: 'http://galva.com.ar/' },
+    { id: 1, src: logo3, alt: 'Sponsor 3', link: '' },
 ];
 
 const Sponsors = () => {

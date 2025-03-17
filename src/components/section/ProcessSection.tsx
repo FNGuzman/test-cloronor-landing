@@ -10,7 +10,7 @@ const ProcessSection = () => {
       icon: 'IoFlask',
       title: 'Producción Moderna',
       description:
-        'Utilizamos tecnologías avanzadas para producir cloro, soda cáustica e hipoclorito de sodio con la máxima eficiencia.',
+        'Utilizamos tecnologías avanzadas para producir de nuestros productos con la maxima eficiencia.',
     },
     {
       icon: 'IoEarth',
@@ -48,12 +48,6 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="py-16 px-8">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-700 dark:text-primary-200 mb-4">Nuestro Proceso</h2>
-        <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-          El proceso utiliza la última tecnología de membrana para obtener el Cloro y la Soda Cáustica, materia de nuestro producto Hipoclorito, utilizando únicamente sal, agua y electricidad.
-        </p>
-      </div>
       <div className="flex flex-wrap justify-center ">
         {processItems.map((item, index) => (
           <div

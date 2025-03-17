@@ -1,7 +1,7 @@
 import InversionCard from '@/components/card/InversionCard';
 import ParallaxSection from '@/components/ParallaxSection';
 import image from '../../assets/image/bg/hero_inversiones.jpg';
-import img from '../../assets/image/section/obligaciones2.jpg';
+import img from '../../assets/image/inversiones/obligaciones.png';
 
 
 const items = [

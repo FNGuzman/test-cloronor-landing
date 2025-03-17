@@ -1,4 +1,4 @@
-import demo3 from '../../assets/image/section/3.jpg';
+import demo3 from '../../assets/image/section/14.png';
 import demo4 from '../../assets/image/section/demo4.jpg';
 import demo5 from '../../assets/image/section/10.png';
 import demo6 from '../../assets/image/section/12.png';
@@ -77,7 +77,7 @@ export default function BentoGrid() {
                                 Experiencia y Soporte Técnico de Primera
                             </p>
                             <p className="text-gray-600 text-sm mt-2">
-                                Con más de 25 años de experiencia en el diseño, construcción, y mantenimiento de plantas químicas, CLORONOR asegura un acompañamiento completo. Nos dedicamos a que tus operaciones funcionen con los mejores estándares de seguridad y eficiencia.
+                                Con más de 15 años de experiencia en el diseño, construcción, y mantenimiento de plantas químicas, CLORONOR asegura un acompañamiento completo. Nos dedicamos a que tus operaciones funcionen con los mejores estándares de seguridad y eficiencia.
                             </p>
                         </div>
                     </div>

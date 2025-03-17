@@ -78,38 +78,41 @@ const TimelineItem: React.FC<{
 
 
   return (
-    <div
-      ref={ref}
-      className={`relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-    >
-      {/* Icon */}
-      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 dark:border-surface-back-cardblack bg-primary-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
-        <svg
-          className="fill-current"
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="10"
-        >
-          <path
-            fillRule="nonzero"
-            d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z"
-          />
-        </svg>
-      </div>
+    <>
 
-      {/* Card */}
-      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-surface-back-cardblack p-4 rounded border border-gray-200 dark:border-gray-700 shadow">
-        <div className="flex items-center justify-between space-x-2 mb-1">
-          <div className="font-bold text-primary-700 dark:text-primary-200">{item.title}</div>
-          <time className="text-xs font-medium text-primary-500 dark:text-primary-400">{item.date}</time>
+      <div
+        ref={ref}
+        className={`relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+      >
+        {/* Icon */}
+        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 dark:border-surface-back-cardblack bg-primary-500 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+          <svg
+            className="fill-current"
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="10"
+          >
+            <path
+              fillRule="nonzero"
+              d="M10.422 1.257 4.655 7.025 2.553 4.923A.916.916 0 0 0 1.257 6.22l2.75 2.75a.916.916 0 0 0 1.296 0l6.415-6.416a.916.916 0 0 0-1.296-1.296Z"
+            />
+          </svg>
         </div>
-        <div
-          className="text-gray-600 dark:text-gray-300"
-          dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
-        />
+
+        {/* Card */}
+        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-surface-back-cardblack p-4 rounded border border-gray-200 dark:border-gray-700 shadow">
+          <div className="flex items-center justify-between space-x-2 mb-1">
+            <div className="font-bold text-primary-700 dark:text-primary-200 text-center flex-1">{item.date}</div>
+            {/* <time className="text-xs font-medium text-primary-500 dark:text-primary-400">{item.date}</time> */}
+          </div>
+          <div
+            className="text-gray-600 dark:text-gray-300"
+            dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

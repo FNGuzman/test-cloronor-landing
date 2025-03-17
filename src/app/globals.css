@@ -185,7 +185,7 @@ html, body {
 
 
 .backgroundImageLeftArrow {
-  background-image: url('../assets/image/bg/productos/leftarrow.svg'); /* Ajusta la ruta */
+  background-image: url('../assets/image/bg/productos/leftarrow.svg'); 
   background-size: cover;
   background-position: center;
 }
@@ -195,7 +195,7 @@ html, body {
 }
 
 .backgroundImageRightArrow {
-  background-image: url('../assets/image/bg/productos/rightarrow.svg'); /* Ajusta la ruta */
+  background-image: url('../assets/image/bg/productos/rightarrow.svg');
   background-size: cover;
   background-position: center;
 }

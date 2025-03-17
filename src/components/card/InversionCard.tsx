@@ -16,7 +16,6 @@ const InversionCard = ({
   imageSrc,
   imagePosition = 'right', // Valor por defecto: imagen a la derecha
 }: InversionCardProps) => {
-  // Convertir título a formato URL-friendly
   const formattedTitle = title.toLowerCase().replace(/\s+/g, '-');
 
   return (
@@ -58,13 +57,13 @@ const InversionCard = ({
       </div>
 
       {/* Imagen (1/3 del ancho) */}
-      <div className="w-full md:w-1/2 relative h-64 md:h-auto">
+      <div className="w-full md:w-1/2 relative h-72 md:h-auto">
         <div className="absolute inset-0 rounded-lg overflow-hidden">
           <Image
             src={imageSrc}
             alt="Inversion Card Image"
             layout="fill"
-            objectFit="cover"
+            objectFit="fill"
             className="rounded-lg"
           />
         </div>
