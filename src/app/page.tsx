@@ -4,8 +4,6 @@ import image from '../assets/image/bg/waterheropage.jpg';
 import logo from '../assets/image/logo/logclor2019.png';
 import HexagonSection from '@/components/section/HexagonSection';
 import QualityStandards from '@/components/section/QualityStandards';
-import demo1 from '../assets/image/section/demo3.jpg';
-import demo2 from '../assets/image/section/demo4.jpg';
 import Sponsors from '@/components/section/Sponsors';
 import Testimonials from '@/components/section/Testimonials';
 import BentoGrid from '@/components/bento/BentoGrid';
@@ -53,26 +51,17 @@ const testimonialsData = {
 export default function HomePage() {
   return (
     <>
-
       <main className=''>
-
         <ParallaxSection backgroundImage={image.src} height='screen' overlay={true}
-          classNameInter="flex w-full h-96  dire justify-center items-center mt-20"
+          classNameInter='flex w-full h-[80vh] justify-center items-center'
         >
-          <div className='flex flex-col'>
+          <div className='flex flex-col items-center justify-center text-center'>
+            <Image src={logo} width={500} height={450} alt='Logo Cloronor' />
             <div>
-
-              <Image src={logo} width={500} height={500} alt='Logo Cloronor'></Image>
-            </div>
-            <div className='text-center'>
-              <p className='text-white text-xl'>Empresa lider en el norte argentino
-              </p>
-              <p className='text-white text-xl'>
-                en la elavoracion y distribucion de productos quimicos
-              </p>
+              <p className='text-white text-2xl font-semibold'>Empresa líder en el norte argentino</p>
+              <p className='text-white text-2xl font-semibold'>En la elaboración y distribución de productos químicos</p>
             </div>
           </div>
-
         </ParallaxSection>
         <ParallaxSection height='screen'
           classNameInter="text-center"
@@ -96,13 +85,8 @@ export default function HomePage() {
           <Testimonials
             data={testimonialsData}
           />
-
-
-
         </ParallaxSection>
-
       </main >
-
     </>
   );
 }

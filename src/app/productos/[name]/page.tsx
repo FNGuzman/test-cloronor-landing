@@ -4,13 +4,15 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import logo from '../../../assets/image/bg/productos/cl2.jpg';
 import Image from 'next/image';
-
+import cl2 from '../../../assets/image/fichas/naclo1.jpg';
+import naoh from '../../../assets/image/fichas/naoh1.jpg';
+import hci from '../../../assets/image/fichas/cih1.jpg'
 const ProductDetailPage = () => {
     const params = useParams();
     const productName = Array.isArray(params.name) ? params.name[0] : params.name;
     const productData: any = {
         cloro: {
-            title: 'Cloro Gas Licuado',
+            title: 'Hipoclorito de Sodio',
             description:
                 'Es fundamental en la industria papelera, de tratamiento de agua, fabricación de PVC y plásticos, así como en los sectores farmacéutico, químico y metalúrgico.',
             industries:
@@ -20,7 +22,7 @@ const ProductDetailPage = () => {
             benefits:
                 'Permite la desinfección masiva de agua, fabricación de productos químicos complejos y procesos de purificación industrial.',
             presentation: 'Se comercializa en forma de gas licuado en cilindros presurizados.',
-            image: '/path-to-image/cloro.jpg',
+            image: cl2,
         },
         hipoclorito: {
             title: 'Hipoclorito de Sodio',
@@ -33,7 +35,7 @@ const ProductDetailPage = () => {
             benefits:
                 'Es fundamental para garantizar la higiene y seguridad en aplicaciones domésticas e industriales.',
             presentation: 'Se comercializa como solución líquida con diferentes concentraciones.',
-            image: '/path-to-image/hipoclorito.jpg',
+            image: cl2,
         },
         hidroxido: {
             title: 'Hidróxido de Sodio (Soda Cáustica)',
@@ -46,7 +48,7 @@ const ProductDetailPage = () => {
             benefits:
                 'Agente versátil y económico, clave para procesos industriales críticos como la fabricación de detergentes y la refinación de petróleo.',
             presentation: 'Disponible en solución al 50% o en forma sólida según requerimientos.',
-            image: '/path-to-image/hidroxido.jpg',
+            image: naoh,
         },
         acidoSulfurico: {
             title: 'Ácido Sulfúrico',
@@ -60,7 +62,7 @@ const ProductDetailPage = () => {
                 'Versatilidad que lo convierte en un pilar de la industria, desde la refinación de petróleo hasta la fabricación de fertilizantes.',
             presentation:
                 'Se distribuye en soluciones de diversas concentraciones, adaptadas a las necesidades del cliente.',
-            image: '/path-to-image/acido-sulfurico.jpg',
+            image: '',
         },
         sulfato: {
             title: 'Sulfato de Aluminio Solución',
@@ -72,7 +74,7 @@ const ProductDetailPage = () => {
             benefits:
                 'Permite obtener agua limpia y segura de manera eficiente, contribuyendo a la protección ambiental y la salud pública.',
             presentation: 'Disponible en solución líquida para aplicaciones industriales.',
-            image: '/path-to-image/sulfato.jpg',
+            image: '',
         },
         acidoClorhidrico: {
             title: 'Ácido Clorhídrico',
@@ -85,7 +87,7 @@ const ProductDetailPage = () => {
             benefits:
                 'Proporciona una solución eficiente para procesos industriales exigentes, con aplicaciones en sectores alimentarios y metalúrgicos.',
             presentation: 'Se presenta como una solución líquida con concentraciones de 31-36%.',
-            image: '/path-to-image/acido-clorhidrico.jpg',
+            image: hci,
         },
         pac: {
             title: 'Policloruro de Aluminio (PAC)',
@@ -99,7 +101,7 @@ const ProductDetailPage = () => {
                 'Permite un tratamiento rápido y eficiente del agua, mejorando la calidad final con menor cantidad de residuo químico.',
             presentation:
                 'Disponible en solución líquida con diversas concentraciones según el uso.',
-            image: '/path-to-image/pac.jpg',
+            image: '',
         },
     };
     // Extraer datos del producto
@@ -212,6 +214,13 @@ const ProductDetailPage = () => {
                             {product.presentation}
                         </em>
                     </p>
+                </div>
+                <div className='flex flex-1 justify-center mt-10'>
+                    {product.image ? (
+                        <Image alt={product.title} src={product.image} width={500} height={1500}></Image>
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         </Parallax>
