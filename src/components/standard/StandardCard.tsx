@@ -15,7 +15,7 @@ const StandardCard = ({ title, description, onViewDocument }: Props) => {
                     <span className="whitespace-nowrap md:origin-bottom-left">{title}</span>
                 </div>
                 <div className="text-gray-700 dark:text-gray-300 text-sm md:text-base">
-                    {description}
+                    <div dangerouslySetInnerHTML={{ __html: description }}></div>
                 </div>
             </div>
             <div className="flex justify-end w-full md:w-auto mt-4 md:mt-0 pr-5 pb-5">

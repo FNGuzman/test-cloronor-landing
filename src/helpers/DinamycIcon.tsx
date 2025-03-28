@@ -1,35 +1,36 @@
 'use client';
 import React, { Suspense } from 'react';
-import * as Icons from 'react-icons/io5';
 import { IconType } from 'react-icons';
 import { Skeleton } from 'primereact/skeleton';
-import classNames from 'classnames';
-
-export type IconName = keyof typeof Icons;
 
 interface DynamicIconProps {
-    iconName: IconName;
+    iconName: string;
     size?: string;
     w?: string;
     h?: string;
     xs?: string;
 }
 
-const DynamicIcon: React.FC<DynamicIconProps> = ({ iconName, size = '24', w, h, xs }: DynamicIconProps) => {
-    const IconComponent = React.lazy(() => {
-        return import(`react-icons/io5`).then((module) => {
-            const Icon: IconType = module[iconName];
+const DynamicIcon: React.FC<DynamicIconProps> = ({ iconName, size = '24', w, h, xs }) => {
+    const IconComponent = React.lazy(() =>
+        import('react-icons/io5').then((module) => {
+            const Icon = module[iconName as keyof typeof module] as IconType | undefined;
+
             if (!Icon) {
-                throw new Error('icon not found');
+                console.warn(`Icon "${iconName}" not found in react-icons/io5.`);
+                return { default: () => <span /> };
             }
-            return { default: () => <Icon size={size} className={`text-primary-600 dark:text-primary-400 ${w} ${h} ${xs}`} /> };
-        }).catch(() => {
-            return { default: () => <span><Skeleton size="2rem" className="text-center"></Skeleton></span> }; // Fallback component
-        });
-    });
+
+            return {
+                default: () => (
+                    <Icon size={size} className={`text-primary-600 dark:text-primary-400 ${w} ${h} ${xs}`} />
+                ),
+            };
+        }).catch(() => ({ default: () => <span /> }))
+    );
 
     return (
-        <Suspense fallback={<Skeleton size="3rem" className="mr-2"></Skeleton>}>
+        <Suspense fallback={''}>
             <IconComponent />
         </Suspense>
     );

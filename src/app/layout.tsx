@@ -24,6 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <title>Cloronor</title>
+      </head>
       <body
         className={`${inter.className} w-full h-full overflow-x-hidden text-gray-600 dark:text-gray-300`}
       >

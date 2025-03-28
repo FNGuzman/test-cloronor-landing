@@ -3,27 +3,15 @@ import { useState } from 'react';
 import Certificaciones from '../card/Certificaciones';
 import StandardCard from '../standard/StandardCard';
 import Image from 'next/image';
+interface Props {
+    standards: {
+        title: string;
+        description: string;
+        images: string[];
+    }[];
+}
 
-// Importa imágenes de las normas ISO
-import iso9001 from '../../assets/image/normas/iso-9001.jpg';
-import iso9001Iqnet from '../../assets/image/normas/9001iqnet.jpg';
-import iso14001 from '../../assets/image/normas/iso-14001.jpg';
-import iso14001Iqnet from '../../assets/image/normas/14001iqnet.jpg';
-
-const standards = [
-    {
-        title: 'ISO9001',
-        description: 'Como parte del fortalecimiento institucional y la búsqueda de la satisfacción de sus clientes y partes interesadas, CLORONOR S.A ha implementado exitosamente el Sistema de Gestión de Calidad Integrado basado en las normas ISO 9001:2008, y a la vez queda iniciado un plan de trabajo destinado a sostener exitosamente dicho sistema.',
-        images: [iso9001.src, iso9001Iqnet.src], // 🔥 Ahora es un array con 2 imágenes
-    },
-    {
-        title: 'ISO14001',
-        description: 'Fruto de sus inquietudes ambientales y con carácter voluntario, CLORONOR S.A comenzó las labores de diseño, desarrollo e implantación de un sistema de gestión medioambiental que garantizase que todas las labores desarrolladas en el seno de su Organización alcancen un alto nivel de protección del medio ambiente en el marco de un desarrollo sostenible.',
-        images: [iso14001.src, iso14001Iqnet.src], // 🔥 Ahora es un array con 2 imágenes
-    },
-];
-
-const QualityStandards = () => {
+const QualityStandards = ({ standards }: Props) => {
     const [selectedImages, setSelectedImages] = useState<string[] | null>(null);
 
     const openModal = (images: string[]) => {

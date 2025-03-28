@@ -1,17 +1,13 @@
 import React from 'react';
 
-// Importa los logos desde tu carpeta de assets
-import logo1 from '../../assets/image/logo/sponsors/logo2.png';
-import logo2 from '../../assets/image/logo/sponsors/logo3.png';
-import logo3 from '../../assets/image/logo/sponsors/logo1.png';
+interface SponsorItem {
+    id: number;
+    src: string;
+    alt: string;
+    link?: string;
+}
 
-const sponsors = [
-    { id: 1, src: logo1, alt: 'Sponsor 1', link: '' },
-    { id: 2, src: logo2, alt: 'Sponsor 2', link: 'http://galva.com.ar/' },
-    { id: 1, src: logo3, alt: 'Sponsor 3', link: '' },
-];
-
-const Sponsors = () => {
+const Sponsors = ({ sponsors }: { sponsors: SponsorItem[] }) => {
     return (
         <section className="w-full flex justify-center items-center p-8">
             <div className="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-16">
@@ -26,9 +22,9 @@ const Sponsors = () => {
                             className="flex items-center justify-center"
                         >
                             <img
-                                src={src.src}
+                                src={src}
                                 alt={alt}
-                                className="h-24 w-auto filter grayscale brightness-0 invert-0 dark:invert transition-all duration-300"
+                                className="h-24 w-auto "
                             />
                         </a>
                     ))}

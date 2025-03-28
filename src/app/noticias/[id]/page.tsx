@@ -26,7 +26,7 @@ export default function BlogPostDetailPage() {
     useEffect(() => {
         const fetchNoticia = async () => {
             try {
-                const response = await fetch(`https://api.formosa.gob.ar/api-cloronor/noticia/${id}`);
+                const response = await fetch(`https://www.pushsoftware.com.ar/api-cloronor/noticia/${id}`);
                 if (!response.ok) throw new Error('Error al cargar la noticia');
 
                 const data: NoticiaDetailEntity = await response.json();

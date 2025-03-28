@@ -1,35 +1,66 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ParallaxSection from '@/components/ParallaxSection';
 import ProductCard from '@/components/card/ProductCard';
 
-const productos = [
-    { product: 'HIPOCLORITO DE SODIO ', formula: 'NaClo', name: 'hipoclorito', direction: 'right', description: 'Empleado en la industria papelera y celulosas, tratamiento de agua, fabricación de PVC y plásticos clorofluorados. En la industria metalúrgica y siderúrgica, farmacéutica, química y petroquímica.', isFavorite: true },
-    { product: 'SULFATO DE ALUMINIO SOLUCIÓN', formula: 'Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>', name: 'sulfato', direction: 'left', description: 'Usado principalmente como floculante en el tratamiento de aguas y procesos de potabilización.', isFavorite: true },
-    { product: 'HIDRÓXIDO DE SODIO (SODA CÁUSTICA)', formula: 'NaOH', name: 'hidroxido', direction: 'right', description: 'Se utiliza en las industrias papelera, farmacéutica, de fabricación de jabón, petrolera y química de proceso.', isFavorite: false },
-    { product: 'ÁCIDO SULFÚRICO', formula: 'H<sub>2</sub>SO<sub>4</sub>', name: 'acidoSulfurico', direction: 'left', description: 'Es clave en la industria química, textil, de explosivos, plásticos, detergentes, caucho sintético, petrolera y papelera.', isFavorite: false },
-    { product: 'ÁCIDO CLORHÍDRICO', formula: 'HCl', name: 'acidoClorhidrico', direction: 'right', description: 'Es utilizado en síntesis químicas, procesamiento de alimentos, decapado de metales, reducción de minerales y limpieza industrial.', isFavorite: false },
-    { product: 'POLICLORURO DE ALUMINIO', formula: 'PAC', name: 'pac', direction: 'left', description: 'Es utilizado en síntesis químicas, procesamiento de alimentos, decapado de metales, reducción de minerales y limpieza industrial.', isFavorite: false },
-    // { product: 'CLORO GAS LICUADO', name: 'CLORO GAS LICUADO ()', direction: 'right', description: 'Es esencial en la potabilización de aguas, tratamiento de piscinas y procesos industriales como floculante.', isFavorite: false },
-];
+interface Producto {
+    id: number;
+    name: string;
+    detail: string;
+    favorite: string;
+    image: string;
+    text: string;
+    formula: string;
+    paginaId: number;
+}
 
-const ProductosPage = () => {
+export default function ProductosPage() {
+    const [productos, setProductos] = useState<Producto[]>([]);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchProductos = async () => {
+            try {
+                const res = await fetch('https://www.pushsoftware.com.ar/api-cloronor/producto/search');
+                if (!res.ok) throw new Error('No se pudo obtener la lista de productos');
+                const json = await res.json();
+
+                // 🔽 Ordenar favoritos primero
+                const sorted = [...json.data].sort((a, b) => {
+                    return b.favorite === "true" ? 1 : -1;
+                });
+
+                setProductos(sorted);
+            } catch (err: any) {
+                setError(err.message);
+            }
+        };
+
+        fetchProductos();
+    }, []);
+
+    if (error) {
+        return (
+            <div className="text-center text-red-500 py-10">
+                Error: {error}
+            </div>
+        );
+    }
+
     return (
         <ParallaxSection height="screen">
-            {productos.map((producto, index) => (
-                <div key={producto.name} className="mb-6"> {/* 🔹 KEY aquí en la <div> */}
+            {productos.map((producto) => (
+                <div key={producto.id} className="mb-6">
                     <ProductCard
-                        product={producto.product}
+                        product={producto.name}
                         formula={producto.formula}
                         name={producto.name}
-                        description={producto.description}
-                        isFavorite={producto.isFavorite}
+                        description={producto.detail}
+                        isFavorite={producto.favorite === "true"}
                     />
                 </div>
             ))}
         </ParallaxSection>
     );
-};
-
-export default ProductosPage;
+}

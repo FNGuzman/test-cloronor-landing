@@ -53,7 +53,7 @@ export default function ContactForm() {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('https://api.formosa.gob.ar/api-cloronor/mail', {
+            const response = await fetch('https://www.pushsoftware.com.ar/api-cloronor/mail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -147,12 +147,7 @@ export default function ContactForm() {
 
                     <div className="mb-6">
                         <label className="block text-sm font-medium">Asunto</label>
-                        <select name="asunto" value={formData.asunto} onChange={handleChange} className="w-full border rounded-lg px-4 py-2">
-                            <option value="">Seleccione</option>
-                            <option value="Consultas">Consultas</option>
-                            <option value="Inversiones">Inversiones</option>
-                            <option value="Otros">Otros</option>
-                        </select>
+                        <input type="text" name="asunto" value={formData.telefono} onChange={handleChange} className="w-full border rounded-lg px-4 py-2" />
                     </div>
 
                     <div className="mb-6">

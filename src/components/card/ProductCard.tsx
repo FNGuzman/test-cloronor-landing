@@ -31,9 +31,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, description, isFavorite
               dangerouslySetInnerHTML={{ __html: formula }}
             />
           </h1>
-          <p className="text-sm sm:text-base text-white text-center sm:text-left">
-            {description}
-          </p>
+          <div className="text-sm sm:text-base text-white text-center sm:text-left"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+
           <div className="flex justify-center sm:justify-start mt-8">
             <Link href={`/productos/${name}`}>
               <button className="uppercase px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded transition-colors duration-300">

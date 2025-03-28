@@ -79,6 +79,19 @@
   font-style: italic;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Orbit&family=Oswald:wght@200..700&display=swap');
+.oswald {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.orbit {
+  font-family: "Orbit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 
 html, body {

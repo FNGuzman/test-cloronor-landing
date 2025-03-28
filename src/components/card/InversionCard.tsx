@@ -5,71 +5,52 @@ import Link from 'next/link';
 
 interface InversionCardProps {
   title: string;
-  items: any[];
+  detailHtml: string;
   imageSrc: string;
-  imagePosition?: 'left' | 'right'; // Nueva prop para controlar la posición
+  imagePosition?: 'left' | 'right';
 }
 
 const InversionCard = ({
   title,
-  items,
+  detailHtml,
   imageSrc,
-  imagePosition = 'right', // Valor por defecto: imagen a la derecha
+  imagePosition = 'right',
 }: InversionCardProps) => {
   const formattedTitle = title.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div
-      className={`flex flex-col md:flex-row items-stretch rounded-lg overflow-hidden ${imagePosition === 'left' ? 'md:flex-row-reverse' : ''
-        }`}
-    >
-      {/* Contenido (3/4 del ancho) */}
+    <div className={`flex flex-col md:flex-row items-stretch rounded-lg overflow-hidden ${imagePosition === 'left' ? 'md:flex-row-reverse' : ''}`}>
       <div className="w-full md:w-2/3 p-6 md:p-8 space-y-6">
-        {/* Título con colores */}
         <h2 className="text-2xl md:text-3xl font-bold text-primary-900 dark:text-primary-200">
           {title}
         </h2>
 
-        {/* Lista de beneficios */}
-        <ul className="space-y-4">
-          {items.map((item, index) => (
-            <li key={index} className="flex items-start gap-4">
-              {/* Icono */}
-              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 flex items-center justify-center rounded-md">
-                <DynamicIcon iconName={item.icon} />
-              </div>
-              {/* Texto con colores */}
-              <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
-                {item.text}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div
+          className="space-y-4 text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: detailHtml }}
+        />
 
-        {/* Botón Ver Más */}
         <div className="mt-6">
-          <Link href={`/inversiones/${formattedTitle}`}>
+          <a href={`/inversiones/${formattedTitle}`}>
             <button className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded transition-colors duration-300">
               Ver más
             </button>
-          </Link>
+          </a>
         </div>
       </div>
 
-      {/* Imagen (1/3 del ancho) */}
-      <div className="w-full md:w-1/2 relative h-72 md:h-auto">
+      <div className="w-full md:w-1/2 relative min-h-96">
         <div className="absolute inset-0 rounded-lg overflow-hidden">
-          <Image
+          <img
             src={imageSrc}
-            alt="Inversion Card Image"
-            layout="fill"
-            objectFit="fill"
-            className="rounded-lg"
+            alt={title}
+            className="object-cover w-full h-full rounded-lg"
           />
         </div>
       </div>
     </div>
   );
 };
+
 
 export default InversionCard;

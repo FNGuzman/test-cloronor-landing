@@ -39,9 +39,9 @@ const BlogPost: React.FC = () => {
         const fetchData = async () => {
             try {
                 const [newsRes, categoriesRes, tagsRes] = await Promise.all([
-                    fetch('https://api.formosa.gob.ar/api-cloronor/noticia/search'),
-                    fetch('https://api.formosa.gob.ar/api-cloronor/categoriaCategoriaNoticia/search'),
-                    fetch('https://api.formosa.gob.ar/api-cloronor/categoriaTag/search')
+                    fetch('https://www.pushsoftware.com.ar/api-cloronor/noticia/search'),
+                    fetch('https://www.pushsoftware.com.ar/api-cloronor/categoriaCategoriaNoticia/search'),
+                    fetch('https://www.pushsoftware.com.ar/api-cloronor/categoriaTag/search')
                 ]);
 
                 if (!newsRes.ok || !categoriesRes.ok || !tagsRes.ok) throw new Error('Error al obtener datos');
