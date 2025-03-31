@@ -1,5 +1,5 @@
-import VerticalTimeline from './VerticalTimeline';
 import AnimatedSection from '../AnimatedSection';
+import VerticalTimeline from './VerticalTimeline';
 
 import { MisionVision, Proceso, TimelineItem } from '@/app/nosotros/page';
 import ProcessSection from './ProcessSection';

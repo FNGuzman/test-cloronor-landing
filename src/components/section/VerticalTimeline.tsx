@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface TimelineItem {
   title: string;
